@@ -2,23 +2,21 @@ package pixelizedgaming.test.utils;
 
 import org.bukkit.Location;
 
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class RayCast {
+public class RayCast extends BukkitRunnable {
     private Location startLocation;
-    private Vector dir;
     private double length;
     private int step;
     private RayStepFI rs;
 
-
-
     public Location castUntilHitBlock(){
-        Vector uLookVector = dir.normalize().divide(new Vector(step,step,step));
+        Vector uLookVector = startLocation.getDirection().normalize().divide(new Vector(step,step,step));
         for(int i = 0; (i < length * step); i++){
             startLocation.add(uLookVector);
             if (startLocation.getBlock().getType().isSolid()){
-                rs.rayStep();
+                rs.rayStep(startLocation);
                 return startLocation;
             }
         }
@@ -31,18 +29,12 @@ public class RayCast {
 
     public static class Builder{
         private Location startLocation;
-        private Vector dir;
         private double length;
         private int step;
         private RayStepFI rs;
 
         public Builder startLocation(Location sl){
             this.startLocation = sl;
-            return this;
-        }
-
-        public Builder dir(Vector dir){
-            this.dir = dir;
             return this;
         }
 
@@ -66,13 +58,12 @@ public class RayCast {
         }
 
         protected Builder(){
-            step = 6;
+            step = 6; // adjust maybe
             length = 100;
         }
     }
     protected RayCast(Builder builder){
         startLocation = builder.startLocation;
-        dir = builder.dir;
         length = builder.length;
         step = builder.step;
         rs = builder.rs;
