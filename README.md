@@ -1,7 +1,8 @@
 # DungeonPixel
 
 ## Intro
- Problem: No good free procedural dungeons generator
+ Problem: No good free procedural dungeons generator.
+ 
  Solution: write my own and open source it so every kid and their mom can run a dungeon crawling server
 
 ## (supposed) Features
