@@ -1,6 +1,6 @@
-##DungeonPixel
+## DungeonPixel
 
-#Intro
+# Intro
  Problem: No good free procedural dungeons generator
  Solution: write my own and open source it so every kid and their mom can run a dungeon crawling server
 
@@ -12,8 +12,8 @@
 # Checklist
   - literally everything, nothing is playable rn except stick makes funny particle beam
 
-#Contributing
+# Contributing
  Please help me fix my spaghetti! all contributions welcome
 
-#Attributions:
+# Attributions:
  special thanks to @sweattypalms for making his hypixel skyblock clone, referenced it a lot for project structure
