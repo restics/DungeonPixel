@@ -7,4 +7,7 @@ commands:
   gaming:
     usage: /gaming <duration>
     description: hahaa
+  balls:
+    usage: /balls
+    description: baslls
 
