@@ -11,7 +11,7 @@
   - Custom Items & mobs from json: TODO
 
 ## Checklist
-  - literally everything, nothing is playable rn except stick makes funny particle beam
+  - literally empty, nothing is playable rn except stick makes funny particle beam
 
 ## Contributing
  Please help me fix my spaghetti! all contributions welcome
