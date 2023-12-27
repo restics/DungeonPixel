@@ -10,7 +10,15 @@
   - Particle Toolkit: makes using paper particlebuilder slightly easier
   - Custom Items & mobs from json: TODO
 
-## Checklist
+## Checklist TODO
+  - 2d dungeon generation with hallways like in dnd
+  - Accessories with random scaling like genshin/wynncraft, but with the interactability/utility of isaac/terraria
+    - 5 accessories per run, 1 of which you can start off with from your collection
+    - can start with 3 after upgrades from bosses or other method unlock
+    - 
+  - Items: weapons can have abilities affecting energy generation, 
+  - Ability system: special and ultimate attacks: specials are big attacks on cooldown, ultimates are huge attacks on cooldown + energy regen
+  - mobs: trash mobs should have nextbot ai for now, but add minibosses with unique attacks and bosses of course
   - literally everything, nothing is playable rn except stick makes funny particle beam
 
 ## Contributing
