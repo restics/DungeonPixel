@@ -17,6 +17,8 @@ public abstract class AbstractParticle extends BukkitRunnable implements IPartic
 
     @Override
     public void run(){
+        duration--;
+        if (duration > 0)
         doParticle();
     }
 }

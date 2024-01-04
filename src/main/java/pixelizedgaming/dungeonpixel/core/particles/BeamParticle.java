@@ -9,30 +9,35 @@ public class BeamParticle extends AbstractParticle{
 
     ParticleBuilder spawnOnStep;
     ParticleBuilder spawnOnFinish;
-
+    RayCast rc;
 
     //2 particlebuilders don't need to be fully built
     public BeamParticle(int duration, Location from, Location to, ParticleBuilder spawnOnStep, ParticleBuilder spawnOnFinish) {
-        super(duration, from, to.subtract(from).getDirection());
-        spawn.setDirection(dir);
+        super(duration, from, to.clone().subtract(from).toVector());
+        spawn.setDirection(to.clone().subtract(from).toVector());
+        System.out.println(spawn);
         this.spawnOnStep = spawnOnStep;
         this.spawnOnFinish = spawnOnFinish;
-    }
-
-    @Override
-    public void doParticle() {
-        RayCast rc = RayCast.builder()
+        rc = RayCast.builder()
                 .startLocation(spawn)
+                .step(3)
                 .rs((loc, step)->{
                     spawnOnStep.location(loc);
                     spawnOnStep.spawn();
 
                 })
+                .length(dir.length())
                 .onFinish((rayCastResult)->{
-                    spawnOnFinish.location(rayCastResult.getEndLocation());
-                    spawnOnFinish.spawn();
+                    if (spawnOnFinish != null) {
+                        spawnOnFinish.location(rayCastResult.getEndLocation());
+                        spawnOnFinish.spawn();
+                    }
                 })
                 .build();
-        rc.castUntilHitBlock();
+    }
+
+    @Override
+    public void doParticle() {
+        rc.castUntilHitEntity();
     }
 }

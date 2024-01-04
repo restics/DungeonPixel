@@ -28,12 +28,12 @@ public class RayCast extends BukkitRunnable {
         World world = startLocation.getWorld();
 
         LivingEntity homingTarget = null;
-
+        Location rcLocation = startLocation.clone();
         for(int i = 0; (i < length * step); i++){
-            startLocation.add(uLookVector);
-            rs.rayStep(startLocation, i / step);
+            rcLocation.add(uLookVector);
+            rs.rayStep(rcLocation, i / step);
 
-            for(Entity ent : world.getNearbyEntities(startLocation, width, width, width)){
+            for(Entity ent : world.getNearbyEntities(rcLocation, width, width, width)){
 
                 result.passedEntities.add((LivingEntity) ent);
                 homingTarget = null; //warnings system is retarded this only works on contact
@@ -42,13 +42,13 @@ public class RayCast extends BukkitRunnable {
             if (isHoming){
                 if (homingTarget == null) {
                     double shortestDist = 100000;
-                    for(Entity e : world.getNearbyEntities(startLocation, homingWidth, homingWidth, homingWidth)){
+                    for(Entity e : world.getNearbyEntities(rcLocation, homingWidth, homingWidth, homingWidth)){
                         if (!(e instanceof LivingEntity)) continue;
                         if (e instanceof Player) continue; // as if we need pvp right hahahahaha
                         if (result.getPassedEntities().contains((LivingEntity) e)) continue;
 
                         Vector endVector = e.getLocation().toVector();
-                        Vector newDirection = endVector.subtract(startLocation.toVector());
+                        Vector newDirection = endVector.subtract(rcLocation.toVector());
                         if (endVector.distance(newDirection) < shortestDist) {
                             homingTarget = (LivingEntity) e;
                             shortestDist = endVector.distance(newDirection);
@@ -56,20 +56,20 @@ public class RayCast extends BukkitRunnable {
                     }
                     if (homingTarget != null) {
                         Vector endVector = homingTarget.getEyeLocation().toVector();
-                        Vector newDirection = endVector.subtract(startLocation.toVector());
+                        Vector newDirection = endVector.subtract(rcLocation.toVector());
                         uLookVector = newDirection.normalize().divide(new Vector(step, step, step));
                     }
                 }
 
             }
 
-            if (startLocation.getBlock().getType().isSolid()){
+            if (rcLocation.getBlock().getType().isSolid()){
                 // ends here anyways
-                result.endLocation = startLocation;
+                result.endLocation = rcLocation;
                 return result;
             }
         }
-        result.endLocation = startLocation;
+        result.endLocation = rcLocation;
         return result;
     }
 
@@ -81,26 +81,28 @@ public class RayCast extends BukkitRunnable {
 
         LivingEntity homingTarget = null;
 
+        Location rcLocation = startLocation.clone();
         for(int i = 0; (i < length * step); i++){
-            startLocation.add(uLookVector);
-            rs.rayStep(startLocation, i / step);
+            rcLocation.add(uLookVector);
+            rs.rayStep(rcLocation, i / step);
 
-            for(Entity ent : world.getNearbyEntities(startLocation, width, width, width)){
-
+            for(Entity ent : world.getNearbyEntities(rcLocation, width, width, width)){
+                result.passedEntities.add((LivingEntity) ent);
                 result.endLocation = ent.getLocation();
                 homingTarget = null;
+                return result;
             }
 
             if (isHoming){
                 if (homingTarget == null) {
                     double shortestDist = 100000;
-                    for(Entity e : world.getNearbyEntities(startLocation, homingWidth, homingWidth, homingWidth)){
+                    for(Entity e : world.getNearbyEntities(rcLocation, homingWidth, homingWidth, homingWidth)){
                         if (!(e instanceof LivingEntity)) continue;
                         if (e instanceof Player) continue; // as if we need pvp right hahahahaha
                         if (result.getPassedEntities().contains((LivingEntity) e)) continue;
 
                         Vector endVector = e.getLocation().toVector();
-                        Vector newDirection = endVector.subtract(startLocation.toVector());
+                        Vector newDirection = endVector.subtract(rcLocation.toVector());
                         if (endVector.distance(newDirection) < shortestDist) {
                             homingTarget = (LivingEntity) e;
                             shortestDist = endVector.distance(newDirection);
@@ -108,20 +110,14 @@ public class RayCast extends BukkitRunnable {
                     }
                     if (homingTarget != null) {
                         Vector endVector = homingTarget.getEyeLocation().toVector();
-                        Vector newDirection = endVector.subtract(startLocation.toVector());
+                        Vector newDirection = endVector.subtract(rcLocation.toVector());
                         uLookVector = newDirection.normalize().divide(new Vector(step, step, step));
                     }
                 }
 
             }
-
-            if (startLocation.getBlock().getType().isSolid()){
-                // ends here anyways
-                result.endLocation = startLocation;
-                return result;
-            }
         }
-        result.endLocation = startLocation;
+        result.endLocation = rcLocation;
         return result;
     }
 
@@ -193,10 +189,12 @@ public class RayCast extends BukkitRunnable {
         }
 
         protected Builder(){
-            step = 6; // adjust maybe
+            step = 10; // adjust maybe
             length = 100;
             width = 0.5;
             homingWidth = 10;
+            rs = (loc,step)->{};
+            onFinish = (loc) ->{};
         }
     }
     protected RayCast(Builder builder){

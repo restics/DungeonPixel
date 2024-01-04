@@ -12,7 +12,6 @@ public class FunParticle1 extends AbstractParticle{
         super(millisDuration, Objects.requireNonNull(p.getWorld().rayTraceBlocks(p.getEyeLocation(), p.getEyeLocation().getDirection(), 100)).getHitPosition().toLocation(p.getWorld()),p.getEyeLocation().getDirection());
     }
 
-
     @Override
     public void doParticle() {
         if(duration >= 1000){

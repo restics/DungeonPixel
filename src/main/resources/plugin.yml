@@ -1,13 +1,13 @@
-name: Test
+name: DungeonPixel
 version: '${project.version}'
-main: pixelizedgaming.test.Test
+main: pixelizedgaming.dungeonpixel.DungeonPixel
 api-version: 1.20
 authors: [ pixelizedgaming ]
 commands:
   gaming:
     usage: /gaming <duration>
     description: hahaa
-  balls:
-    usage: /balls
-    description: baslls
+  generatemap:
+    usage: /generatemap
+    description: generate dungeon map at look location
 

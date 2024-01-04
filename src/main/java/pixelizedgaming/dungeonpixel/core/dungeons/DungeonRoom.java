@@ -26,11 +26,10 @@ public class DungeonRoom {
         bottomLeft = roomCenter.subtract(sizeX/2, 0, sizeZ/2);
     }
 
-    public DungeonRoom(RoomType roomType) {
-        sizeX = roomType.x;
-        sizeY = roomType.y;
-        sizeZ = roomType.z;
+    public DungeonRoom(RoomType roomType, Location roomCenter) {
+        this(roomType.x, roomType.y, roomType.z, roomCenter);
         buildMaterial = roomType.mat;
+
     }
 
     public int getSizeX() {
@@ -47,5 +46,9 @@ public class DungeonRoom {
 
     public void spawnMobs(){
 
+    }
+    @Override
+    public String toString(){
+        return roomCenter + "\n material: " + buildMaterial + "\n sizeX: " + sizeX + "\nsizeZ: " + sizeZ ;
     }
 }

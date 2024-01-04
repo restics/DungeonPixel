@@ -9,4 +9,23 @@ public class Dungeon {
     int sizeZ;
     boolean isRunning;
 
+    public DungeonRoom[] getRooms() {
+        return rooms;
+    }
+
+    public Location getCentralLocation() {
+        return centralLocation;
+    }
+
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public int getSizeZ() {
+        return sizeZ;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
 }
