@@ -3,7 +3,7 @@
 ## Intro
  Problem: No good free procedural dungeons generator.
  
- Solution: write my own and open source it so every kid and their mom can run a dungeon crawling server
+ Solution: write my own so I can play minecraft dungeon crawlers everytime
 
 ## (planned) Features
   - Data driven procedural dungeon generator: just drop in your worldedit schematics and watch them generate your own custom dungeon!
