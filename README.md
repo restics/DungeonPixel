@@ -10,9 +10,6 @@
   - Particle Toolkit: makes using paper particlebuilder slightly easier
   - Custom Items & mobs from json: TODO
 
-## Checklist
-  - literally empty, nothing is playable rn except stick makes funny particle beam
-
 ## Contributing
  Please help me fix my spaghetti! all contributions welcome
 
