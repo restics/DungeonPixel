@@ -1,4 +1,4 @@
-# DungeonPixel
+# Glass
 
 ## Intro
  Problem: No good free procedural dungeons generator.
